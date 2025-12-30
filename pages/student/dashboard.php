@@ -8,9 +8,19 @@ require_once '../../classes/Security.php';
 include '../partials/header.php';
 include '../partials/nav_student.php';
 
+Security::requireStudent();
+
+// Variables pour la navigation
+$currentPage = 'dashboard';
+$pageTitle = 'dashboard';
+
+// Récupérer les données
+$studentId = $_SESSION['user_id'];
+$userName = $_SESSION['user_nom'];
+
+
 $StudentCategory = new StudentCategory();
 $categories = $StudentCategory->getAll();
-
 ?>
 
 <body>

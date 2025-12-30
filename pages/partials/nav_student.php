@@ -1,14 +1,17 @@
 <?php
 
+
 $userName = $userName ?? $_SESSION['user_nom'] ?? 'User';
 $initials = strtoupper(substr($userName, 0, 1) . substr(explode(' ', $userName)[1] ?? '', 0, 1));
 
 
 $basePath = '';
-if (strpos($_SERVER['PHP_SELF'], '/students/') !== false) {
+if (strpos($_SERVER['PHP_SELF'], '/student/') !== false) {
     $basePath = '../';
 }
 ?>
+
+
 
 <nav class="bg-white shadow-lg fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,25 +26,25 @@ if (strpos($_SERVER['PHP_SELF'], '/students/') !== false) {
 
                 <div class="hidden md:ml-10 md:flex md:space-x-8">
 
-                    <a href="<?= $basePath ?>students/dashboard.php"
+                    <a href="<?= $basePath ?>student/dashboard.php"
                         class="<?= ($currentPage ?? '') === 'dashboard' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' ?> inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         <i class="fas fa-home mr-2"></i>Tableau de bord
                     </a>
 
 
-                    <a href="<?= $basePath ?>students/quizzes.php"
+                    <a href="<?= $basePath ?>student/quizzes.php"
                         class="<?= ($currentPage ?? '') === 'quizzes' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' ?> inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         <i class="fas fa-clipboard-list mr-2"></i>Quiz Disponibles
                     </a>
 
 
-                    <a href="<?= $basePath ?>students/quiz_result.php"
+                    <a href="<?= $basePath ?>student/quiz_result.php"
                         class="<?= ($currentPage ?? '') === 'resultats' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' ?> inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         <i class="fas fa-chart-bar mr-2"></i>Mes Résultats
                     </a>
 
 
-                    <a href="<?= $basePath ?>students/history.php"
+                    <a href="<?= $basePath ?>student/history.php"
                         class="<?= ($currentPage ?? '') === 'history' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' ?> inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         <i class="fas fa-history mr-2"></i>Historique
                     </a>
