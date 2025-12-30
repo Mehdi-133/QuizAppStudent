@@ -7,8 +7,8 @@
 require_once '../config/database.php';
 require_once '../classes/Database.php';
 require_once '../classes/Security.php';
-require_once '../classes/Quiz.php';
-require_once '../classes/Question.php';
+require_once '../classes/teacher_classes/Quiz.php';
+require_once '../classes/teacher_classes/Question.php';
 
 // Vérifier que l'utilisateur est enseignant
 Security::requireTeacher();

@@ -2,7 +2,7 @@
 require_once '../config/database.php';
 require_once '../classes/Database.php';
 require_once '../classes/Security.php';
-require_once '../classes/Category.php';
+require_once '../classes/teacher_classes/Category.php';
 
 Security::requireTeacher();
 

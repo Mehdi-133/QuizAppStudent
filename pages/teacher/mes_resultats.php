@@ -7,7 +7,7 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
-require_once '../../classes/Result.php';
+require_once '../../classes/teacher_classes/Result.php';
 
 // Vérifier que l'utilisateur est connecté
 Security::requireLogin();

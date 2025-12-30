@@ -40,6 +40,7 @@ class Category {
         return $result->fetchAll();
     }
     
+    
    
     public function getById($id) {
         $sql = "SELECT * FROM categories WHERE id = ?";
