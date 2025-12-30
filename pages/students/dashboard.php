@@ -2,22 +2,16 @@
 
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
+require_once '../../classes/student_classes/StudentCategory.php';
 require_once '../../classes/Security.php';
 
+include '../partials/header.php';
+include '../partials/nav_student.php';
+
+$StudentCategory = new StudentCategory();
+$categories = $StudentCategory->getAll();
 
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuizMaster - Espace Etudiant</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
 
 <body>
 
@@ -38,20 +32,24 @@ require_once '../../classes/Security.php';
                 <h2 class="text-3xl font-bold text-gray-900 mb-8">Catégories Disponibles</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div onclick="showStudentSection('categoryQuizzes', 'HTML/CSS')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
-                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white">
-                            <i class="fas fa-code text-4xl mb-3"></i>
-                            <h3 class="text-xl font-bold">HTML/CSS</h3>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Maîtrisez les bases du web</p>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i>12 quiz</span>
-                                <span class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</span>
+
+                    <?php foreach ($categories as $cat): ?>
+
+
+                        <div onclick="showStudentSection('categoryQuizzes', 'HTML/CSS')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white">
+                                <i class="fas fa-code text-4xl mb-3"></i>
+                                <h3 class="text-xl font-bold"><?= $cat['nom']; ?></h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 mb-4"><?= $cat['description']; ?></p>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i><?= $cat['quiz_count']; ?> quiz<?= $cat['quiz_count'] != 1 ? 's' : ''; ?></span>
+                                    <span class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    <?php endforeach; ?>
                     <div onclick="showStudentSection('categoryQuizzes', 'JavaScript')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
                         <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 text-white">
                             <i class="fas fa-laptop-code text-4xl mb-3"></i>
@@ -366,7 +364,5 @@ require_once '../../classes/Security.php';
         }
     </script>
 </body>
-
-</html>
 
 <?php include '../partials/footer.php'; ?>
