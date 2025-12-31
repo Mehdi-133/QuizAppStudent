@@ -6,39 +6,39 @@ require_once '../../classes/Security.php';
 require_once '../../classes/teacher_classes/Quiz.php';
 require_once '../../classes/teacher_classes/Question.php';
 
-// // Vérifier que l'utilisateur est connecté
-// Security::requireLogin();
+// Vérifier que l'utilisateur est connecté
+Security::requireLogin();
 
-// // Variables pour la navigation
-// $currentPage = 'quizzes';
-// $pageTitle = 'Passer un Quiz';
+// Variables pour la navigation
+$currentPage = 'quizzes';
+$pageTitle = 'Passer un Quiz';
 
-// // Récupérer l'ID du quiz
-// $quizId = intval($_GET['id'] ?? 0);
-// $userId = $_SESSION['user_id'];
-// $userName = $_SESSION['user_nom'];
+// Récupérer l'ID du quiz
+$quizId = intval($_GET['id'] ?? 0);
+$userId = $_SESSION['user_id'];
+$userName = $_SESSION['user_nom'];
 
-// // Récupérer le quiz et ses questions
-// $quizObj = new Quiz();
-// $quiz = $quizObj->getById($quizId);
+// Récupérer le quiz et ses questions
+$quizObj = new Quiz();
+$quiz = $quizObj->getById($quizId);
 
-// if (!$quiz || !$quiz['is_active']) {
-//     $_SESSION['quiz_error'] = 'Quiz non disponible';
-//     header('Location: dashboard.php');
-//     exit();
-// }
+if (!$quiz || !$quiz['is_active']) {
+    $_SESSION['quiz_error'] = 'Quiz non disponible';
+    header('Location: dashboard.php');
+    exit();
+}
 
-// $questionObj = new Question();
-// $questions = $questionObj->getAllByQuiz($quizId);
+$questionObj = new Question();
+$questions = $questionObj->getAllByQuiz($quizId);
 
-// if (empty($questions)) {
-//     $_SESSION['quiz_error'] = 'Ce quiz ne contient aucune question';
-//     header('Location: dashboard.php');
-//     exit();
-// }
+if (empty($questions)) {
+    $_SESSION['quiz_error'] = 'Ce quiz ne contient aucune question';
+    header('Location: dashboard.php');
+    exit();
+}
 
-// // Durée du quiz en secondes (30 minutes par défaut)
-// $time_limit = 1800; // 30 minutes
+// Durée du quiz en secondes (30 minutes par défaut)
+$time_limit = 1800; // 30 minutes
 ?>
 <?php include '../partials/header.php'; ?>
 <?php include '../partials/nav_student.php'; ?>

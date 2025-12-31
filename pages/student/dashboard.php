@@ -25,6 +25,20 @@ $categories = $StudentCategory->getAll();
 include '../partials/header.php';
 include '../partials/nav_student.php';
 ?>
+
+
+<?php
+$gradients = [
+    'from-blue-500 to-blue-600',
+    'from-green-500 to-green-600',
+    'from-purple-500 to-purple-600',
+    'from-pink-500 to-pink-600',
+    'from-indigo-500 to-indigo-600',
+    'from-orange-500 to-orange-600',
+    'from-teal-500 to-teal-600',
+];
+?>
+
 <body>
 
 
@@ -46,10 +60,11 @@ include '../partials/nav_student.php';
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                     <?php foreach ($categories as $cat): ?>
+                        <?php $randomGradient = $gradients[array_rand($gradients)]; ?>
 
 
-                        <div onclick="showStudentSection('categoryQuizzes', 'HTML/CSS')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
-                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white">
+                        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white  <?= $randomGradient ?>" >
                                 <i class="fas fa-code text-4xl mb-3"></i>
                                 <h3 class="text-xl font-bold"><?= $cat['nom']; ?></h3>
                             </div>
@@ -57,38 +72,12 @@ include '../partials/nav_student.php';
                                 <p class="text-gray-600 mb-4"><?= $cat['description']; ?></p>
                                 <div class="flex justify-between items-center text-sm">
                                     <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i><?= $cat['quiz_count']; ?> quiz<?= $cat['quiz_count'] != 1 ? 's' : ''; ?></span>
-                                    <a href="quizzes.php?category=<?= $cat['id']; ?>"  class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</a>
+                                    <a href="quizzes.php?id=<?= $cat['id'] ?>" class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</a>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <div onclick="showStudentSection('categoryQuizzes', 'JavaScript')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
-                        <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 text-white">
-                            <i class="fas fa-laptop-code text-4xl mb-3"></i>
-                            <h3 class="text-xl font-bold">JavaScript</h3>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Programmation interactive</p>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i>8 quiz</span>
-                                <span class="text-purple-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div onclick="showStudentSection('categoryQuizzes', 'PHP/MySQL')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
-                        <div class="bg-gradient-to-br from-green-500 to-green-600 p-6 text-white">
-                            <i class="fas fa-database text-4xl mb-3"></i>
-                            <h3 class="text-xl font-bold">PHP/MySQL</h3>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Backend et bases de données</p>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i>10 quiz</span>
-                                <span class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</span>
-                            </div>
-                        </div>
-                    </div>
 
                     <div onclick="showStudentSection('studentResults')" class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group cursor-pointer">
                         <div class="bg-gradient-to-br from-orange-500 to-orange-600 p-6 text-white">
