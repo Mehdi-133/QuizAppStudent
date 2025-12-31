@@ -4,13 +4,24 @@ require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
 
+Security::requireStudent();
+
+// Variables pour la navigation
+$currentPage = 'history';
+$pageTitle = 'history';
+
+// Récupérer les données
+$studentId = $_SESSION['user_id'];
+$userName = $_SESSION['user_nom'];
+
 include '../partials/header.php';
 include '../partials/nav_student.php';
 
-?>
+
+// ?>
 
 <!-- HISTORY SECTION -->
-<div id="studentHistory" class="student-section">
+<div id="studentHistory" class="student-section  pt-16">
     <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <button onclick="showStudentSection('studentDashboard')" class="text-white hover:text-green-100 mb-4">

@@ -6,10 +6,27 @@ require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
 
 
+
+
+
+Security::requireStudent();
+
+// Variables pour la navigation
+$currentPage = 'quiz_result';
+$pageTitle = 'quiz_result';
+
+// Récupérer les données
+$studentId = $_SESSION['user_id'];
+$userName = $_SESSION['user_nom'];
+
+
 include '../partials/header.php';
 include '../partials/nav_student.php';
 
 ?>
+
+
+
 
 <!-- Student Results -->
 <div id="studentResults" class="student-section pt-16">

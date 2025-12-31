@@ -5,8 +5,7 @@ require_once '../../classes/Database.php';
 require_once '../../classes/student_classes/StudentCategory.php';
 require_once '../../classes/Security.php';
 
-include '../partials/header.php';
-include '../partials/nav_student.php';
+
 
 Security::requireStudent();
 
@@ -21,8 +20,11 @@ $userName = $_SESSION['user_nom'];
 
 $StudentCategory = new StudentCategory();
 $categories = $StudentCategory->getAll();
-?>
 
+
+include '../partials/header.php';
+include '../partials/nav_student.php';
+?>
 <body>
 
 
@@ -55,7 +57,7 @@ $categories = $StudentCategory->getAll();
                                 <p class="text-gray-600 mb-4"><?= $cat['description']; ?></p>
                                 <div class="flex justify-between items-center text-sm">
                                     <span class="text-gray-500"><i class="fas fa-clipboard-list mr-2"></i><?= $cat['quiz_count']; ?> quiz<?= $cat['quiz_count'] != 1 ? 's' : ''; ?></span>
-                                    <span class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</span>
+                                    <a href="quizzes.php?category=<?= $cat['id']; ?>"  class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform">Explorer →</a>
                                 </div>
                             </div>
                         </div>
