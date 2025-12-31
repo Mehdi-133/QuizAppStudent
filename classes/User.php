@@ -131,6 +131,8 @@ class User {
     
     // Crée un nouvel utilisateur
     
+
+    //bdel enseignant 
     public function create($nom, $email, $password, $role = 'enseignant') {
         // Validation
         if (empty($nom) || empty($email) || empty($password)) {
