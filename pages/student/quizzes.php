@@ -81,7 +81,7 @@ include '../partials/nav_student.php';
                             </span>
                         </div>
 
-                        <a href="#"
+                        <a href="quiz_start.php?id=<?=$quiz['id']?>"
                             class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-semibold">
                             Commencer le Quiz
                         </a>

@@ -4,9 +4,9 @@
  */
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'quiz_platform');
+define('DB_NAME', 'QuizApp');
 define('DB_USER', 'root');
-define('DB_PASS', 'Mehdi133-');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // Configuration des sessions sécurisées
