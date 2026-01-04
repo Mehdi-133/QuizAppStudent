@@ -1,32 +1,44 @@
 <?php
 
-
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Security.php';
-
-
-
-
+require_once '../../classes/student_classes/StudentResult.php';
 
 Security::requireStudent();
 
-// Variables pour la navigation
+
 $currentPage = 'quiz_result';
 $pageTitle = 'quiz_result';
 
-// Récupérer les données
 $studentId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
+$resultsObj = new Results();
+$results = $resultsObj->getResultsByStudent($studentId);
+
+$totalQuizzes = count($results);
+$totalScore = 0;
+$totalQuestions = 0;
+$passedCount = 0;
+
+foreach($results as $res){
+    $totalScore += $res['score'];
+    $totalQuestions += $res['total_questions'];
+    if($res['score'] >= ($res['total_questions']/2)) {
+        $passedCount++;
+    }
+}
+
+
+$averageScore = $totalQuestions > 0 ? round(($totalScore / $totalQuestions) * 20, 1) : 0;
+
+$successRate = $totalQuizzes > 0 ? round(($passedCount / $totalQuizzes) * 100) : 0;
 
 include '../partials/header.php';
 include '../partials/nav_student.php';
 
 ?>
-
-
-
 
 <!-- Student Results -->
 <div id="studentResults" class="student-section pt-16">
@@ -48,7 +60,7 @@ include '../partials/nav_student.php';
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 text-sm">Quiz Complétés</p>
-                    <p class="text-3xl font-bold text-gray-900">24</p>
+                    <p class="text-3xl font-bold text-gray-900"><?= $totalQuizzes ?></p>
                 </div>
                 <div class="bg-blue-100 p-3 rounded-lg">
                     <i class="fas fa-check-circle text-blue-600 text-2xl"></i>
@@ -60,7 +72,7 @@ include '../partials/nav_student.php';
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 text-sm">Moyenne</p>
-                    <p class="text-3xl font-bold text-gray-900">16.5/20</p>
+                    <p class="text-3xl font-bold text-gray-900"><?= $averageScore ?>/20</p>
                 </div>
                 <div class="bg-green-100 p-3 rounded-lg">
                     <i class="fas fa-star text-green-600 text-2xl"></i>
@@ -72,7 +84,7 @@ include '../partials/nav_student.php';
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 text-sm">Taux Réussite</p>
-                    <p class="text-3xl font-bold text-gray-900">85%</p>
+                    <p class="text-3xl font-bold text-gray-900"><?= $successRate ?>%</p>
                 </div>
                 <div class="bg-purple-100 p-3 rounded-lg">
                     <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
@@ -80,17 +92,7 @@ include '../partials/nav_student.php';
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 text-sm">Classement</p>
-                    <p class="text-3xl font-bold text-gray-900">#12</p>
-                </div>
-                <div class="bg-yellow-100 p-3 rounded-lg">
-                    <i class="fas fa-trophy text-yellow-600 text-2xl"></i>
-                </div>
-            </div>
-        </div>
+    
     </div>
 </div>
 
@@ -109,60 +111,46 @@ include '../partials/nav_student.php';
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 text-sm font-medium text-gray-900">Les Bases de HTML5</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">HTML/CSS</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-lg font-bold text-green-600">18/20</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04 Déc 2024</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">28:45</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            <i class="fas fa-check mr-1"></i>Réussi
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 text-sm font-medium text-gray-900">CSS Avancé</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">HTML/CSS</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-lg font-bold text-green-600">15/20</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">03 Déc 2024</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">24:12</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            <i class="fas fa-check mr-1"></i>Réussi
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 text-sm font-medium text-gray-900">JavaScript Fondamentaux</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">JavaScript</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-lg font-bold text-red-600">8/20</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">02 Déc 2024</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30:00</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                            <i class="fas fa-times mr-1"></i>Échoué
-                        </span>
-                    </td>
-                </tr>
+                <?php if(!empty($results)): ?>
+                    <?php foreach($results as $res):
+                        $statusText = $res['score'] >= ($res['total_questions']/2) ? 'Réussi' : 'Échoué';
+                        $statusColor = $res['score'] >= ($res['total_questions']/2) ? 'green' : 'red';
+                        $completedAt = date('d M Y', strtotime($res['completed_at']));
+                        $timeTaken = $res['time_taken'] ?? '00:00';
+                        $categoryName = $res['categorie_id'] ?? 'Général';
+                    ?>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= htmlspecialchars($res['titre']) ?></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                <?= htmlspecialchars($categoryName) ?>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="text-lg font-bold text-<?= $statusColor ?>-600">
+                                <?= $res['score'] ?>/<?= $res['total_questions'] ?>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= $completedAt ?></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= $timeTaken ?></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<?= $statusColor ?>-100 text-<?= $statusColor ?>-800">
+                                <i class="fas <?= $statusColor === 'green' ? 'fa-check' : 'fa-times' ?> mr-1"></i>
+                                <?= $statusText ?>
+                            </span>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                            Aucun résultat pour le moment.
+                        </td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
 </div>
-</body>
-
-</html>
 
 <?php include '../partials/footer.php'; ?>
