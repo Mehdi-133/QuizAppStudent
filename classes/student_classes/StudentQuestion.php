@@ -23,7 +23,8 @@ class StudentQuestions
         option1,
         option2,
         option3,
-        option4
+        option4,
+        correct_option
         FROM questions
         WHERE quiz_id = ?
         ORDER BY id ASC;";
