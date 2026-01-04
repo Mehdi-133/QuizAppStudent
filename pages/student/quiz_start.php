@@ -15,7 +15,7 @@ if ($quizId <= 0) {
 $studentId = $_SESSION['user_id'];
 
 $resultsObj = new Results();
-$existingResult = $resultsObj->getResultsByStudentAndQuiz($studentId, $quizId);
+$existingResult = $resultsObj->countAttemptsByStudent($studentId, $quizId);
 
 if ($existingResult) {
     die('Vous avez déjà passé ce quiz. Vous ne pouvez pas le refaire.');
@@ -80,8 +80,8 @@ foreach ($questions as $q) {
         <div class="text-5xl font-bold text-green-600">
             <span id="scoreDisplay">0</span> / <?= $totalQuestions ?>
         </div>
-        <a href="dashboard.php" class="inline-block mt-6 px-6 py-3 bg-indigo-600 text-white rounded">
-            Retour au tableau de bord
+        <a href="quiz_result.php" class="inline-block mt-6 px-6 py-3 bg-indigo-600 text-white rounded">
+           Afficher les résultats
         </a>
     </div>
 </div>

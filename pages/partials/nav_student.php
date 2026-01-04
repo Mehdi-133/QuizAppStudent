@@ -43,11 +43,6 @@ if (strpos($_SERVER['PHP_SELF'], '/student/') !== false) {
                         <i class="fas fa-chart-bar mr-2"></i>Mes Résultats
                     </a>
 
-
-                    <a href="<?= $basePath ?>student/history.php"
-                        class="<?= ($currentPage ?? '') === 'history' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' ?> inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                        <i class="fas fa-history mr-2"></i>Historique
-                    </a>
                 </div>
             </div>
 
@@ -89,10 +84,7 @@ if (strpos($_SERVER['PHP_SELF'], '/student/') !== false) {
                 class="<?= ($currentPage ?? '') === 'resultats' ? 'bg-green-50 border-green-500 text-green-700' : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800' ?> block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
                 <i class="fas fa-chart-bar mr-2"></i>Mes Résultats
             </a>
-            <a href="<?= $basePath ?>students/history.php"
-                class="<?= ($currentPage ?? '') === 'history' ? 'bg-green-50 border-green-500 text-green-700' : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800' ?> block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-                <i class="fas fa-history mr-2"></i>Historique
-            </a>
+
         </div>
     </div>
 </nav>

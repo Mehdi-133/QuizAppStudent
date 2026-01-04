@@ -3,6 +3,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/student_classes/StudentCategory.php';
+
+require_once '../../classes/student_classes/StudentResult.php';
 require_once '../../classes/Security.php';
 
 
@@ -17,9 +19,13 @@ $pageTitle = 'dashboard';
 $studentId = $_SESSION['user_id'];
 $userName = $_SESSION['user_nom'];
 
+$count = new Results();
+$totalAttempts = $count->countAttemptsByStudent($studentId);
 
 $StudentCategory = new StudentCategory();
 $categories = $StudentCategory->getAll();
+
+
 
 
 include '../partials/header.php';
@@ -87,8 +93,8 @@ $gradients = [
                         <div class="p-6">
                             <p class="text-gray-600 mb-4">Consultez vos performances</p>
                             <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500"><i class="fas fa-trophy mr-2"></i>24 tentatives</span>
-                                <span class="text-orange-600 font-semibold group-hover:translate-x-2 transition-transform">Voir →</span>
+                                <span class="text-gray-500"><i class="fas fa-trophy mr-2"></i><?= $totalAttempts ?></span>
+                                <a href="quiz_result.php"class="text-orange-600 font-semibold group-hover:translate-x-2 transition-transform">Voir →</a>
                             </div>
                         </div>
                     </div>

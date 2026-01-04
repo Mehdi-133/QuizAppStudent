@@ -45,14 +45,17 @@ class Results
     }
 
   
-   public function getResultsByStudentAndQuiz($studentId, $quizId)
-    {
-        $sql = "SELECT * FROM results 
-                WHERE etudiant_id = ? AND quiz_id = ?
-                LIMIT 1";
+   public function countAttemptsByStudent($studentId)
+{
+    $sql = "SELECT COUNT(*) AS total 
+            FROM results 
+            WHERE etudiant_id = ?";
 
-        $stmt = $this->db->query($sql, [$studentId, $quizId]);
-        return $stmt->fetch(); 
-    }
+    $stmt = $this->db->query($sql, [$studentId]);
+    $row = $stmt->fetch();
+
+    return $row['total'] ?? 0;
+}
+
 }
 
