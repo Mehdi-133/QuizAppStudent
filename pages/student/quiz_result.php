@@ -118,7 +118,7 @@ include '../partials/nav_student.php';
                         $statusColor = $res['score'] >= ($res['total_questions']/2) ? 'green' : 'red';
                         $completedAt = date('d M Y', strtotime($res['completed_at']));
                         $timeTaken = $res['time_taken'] ?? '00:00';
-                        $categoryName = $res['categorie_id'] ?? 'Général';
+                        $categoryName = $res['categorie_nom'] ?? 'Général';
                     ?>
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= htmlspecialchars($res['titre']) ?></td>

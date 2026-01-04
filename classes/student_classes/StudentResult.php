@@ -34,9 +34,10 @@ class Results
 
     public function getResultsByStudent($studentId)
     {
-        $sql = "SELECT r.*, q.titre, q.categorie_id
+        $sql = "SELECT r.*, q.titre, q.categorie_id, c.nom AS categorie_nom
                 FROM results r
                 JOIN quiz q ON r.quiz_id = q.id
+                join categories c on q.categorie_id = c.id
                 WHERE r.etudiant_id = ?
                 ORDER BY r.created_at DESC";
 
