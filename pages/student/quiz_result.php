@@ -40,6 +40,7 @@ include '../partials/nav_student.php';
 
 ?>
 
+
 <!-- Student Results -->
 <div id="studentResults" class="student-section pt-16">
     <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white">
